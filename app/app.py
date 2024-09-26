@@ -23,10 +23,10 @@ DATABASE = os.getenv('DATABASE')
 
 def get_db_connection():
     conn = mysql.connector.connect(
-        host=HOST,  # Cambia esto si es necesario
-        user=USER,  # Cambia esto a tu usuario
-        password=PASSWORD,  # Cambia esto a tu contraseña
-        database=DATABASE  # Cambia esto a tu base de datos
+        host=HOST, 
+        user=USER,  
+        password=PASSWORD,  
+        database=DATABASE  
     )
     return conn
 
