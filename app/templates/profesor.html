@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Profesor - Agregar Palabra</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Agregar Palabra</h1>
+
+    {% if message %}
+        <p>{{ message }}</p>
+    {% endif %}
+
+    <form method="POST">
+        <label for="palabra">Palabra en inglés:</label>
+        <input type="text" name="palabra" id="palabra" required><br>
+
+        <label for="tipo_palabra">Tipo de palabra:</label>
+        <input type="text" name="tipo_palabra" id="tipo_palabra" required><br>
+
+        <label for="imagen">URL de imagen (opcional):</label>
+        <input type="text" name="imagen" id="imagen"><br>
+
+        <button type="submit">Guardar</button>
+    </form>
+
+    <a href="{{ url_for('index') }}">Volver</a>
+</body>
+</html>

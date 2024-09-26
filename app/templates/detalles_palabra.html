@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de {{ palabra['palabra'].capitalize() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>{{ palabra['palabra'].capitalize() }}</h1>
+    <img src="{{ palabra['imagen'] }}" alt="{{ palabra['palabra'] }}" />
+    <h2>Traducciones:</h2>
+    <ul>
+        {% for traduccion in traducciones %}
+            <li>{{ traduccion['traduccion'].capitalize() }}</li>
+        {% endfor %}
+    </ul>
+    <h2>Oraciones:</h2>
+    <ul>
+        {% for oracion in oraciones %}
+            <li>Inglés: {{ oracion['oracion_ingles'] }}</li>
+            <li>Español: {{ oracion['oracion_espaniol']}}</li>
+            <h2></h2>
+        {% endfor %}
+    </ul>
+
+    <a href="{{ url_for('listar_palabras', tipo=palabra['tipo']) }}">Volver</a>
+    <a href="{{ url_for('editar_palabra', palabra_id=palabra['id_palabra']) }}">Editar</a>  <!-- Agregar este enlace -->
+</body>
+</html>

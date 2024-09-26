@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar {{ palabra['palabra'].capitalize() }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Editar Palabra</h1>
+    <form method="POST">
+        <label for="palabra">Palabra:</label>
+        <input type="text" id="palabra" name="palabra" value="{{ (palabra['palabra']).lower() }}" required><br>
+
+        <label for="tipo_palabra">Tipo de Palabra:</label>
+        <input type="text" id="tipo_palabra" name="tipo_palabra" value="{{ palabra['tipo_palabra'].lower() }}" required><br>
+
+        <label for="imagen">URL de Imagen:</label>
+        <input type="text" id="imagen" name="imagen" value="{{ palabra['imagen'].lower() }}"><br>
+
+       <h2>Traducciones:</h2>
+{% for traduccion in traducciones %}
+    <div>
+        <span>{{ traduccion.traduccion.capitalize() }}</span>
+        <button type="submit" name="eliminar_traduccion" value="{{ traduccion.id_traduccion }}">Eliminar</button>
+    </div>
+{% endfor %}
+
+<h2>Oraciones:</h2>
+{% for oracion in oraciones %}
+    <div>
+        <span>{{ oracion.oracion_ingles.capitalize() }}</span>
+        <span>{{ oracion.oracion_espaniol.capitalize() }}</span>
+        <button type="submit" name="eliminar_oracion" value="{{ oracion.id_oracion }}">Eliminar</button>
+    </div>
+{% endfor %}
+<h2>Agregar:</h2>
+        <label for="nueva_traduccion">Agregar Nueva Traducción:</label>
+        <input type="text" id="nueva_traduccion" name="nueva_traduccion"><br>
+
+        <label for="nueva_oracion_ingles">Agregar Nueva Oración (Inglés):</label>
+        <input type="text" id="nueva_oracion_ingles" name="nueva_oracion_ingles"><br>
+        <label for="nueva_oracion_espaniol">Agregar Nueva Oración (Español):</label>
+        <input type="text" id="nueva_oracion_espaniol" name="nueva_oracion_espaniol"><br>
+
+
+        <input type="submit" value="Guardar Cambios">
+    </form>
+    <a href="{{ url_for('detalles_palabra', palabra_id=palabra['id_palabra']) }}">Cancelar</a>
+</body>
+</html>

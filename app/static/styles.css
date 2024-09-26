@@ -1,0 +1,113 @@
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #ededabff; /* Color de fondo */
+    margin: 0;
+    padding: 20px;
+}
+
+/* Centrar el contenedor principal */
+.container {
+    max-width: 800px; /* Ancho máximo del contenedor */
+    margin: 0 auto; /* Centrando horizontalmente */
+}
+
+/* Estilo para h1 */
+h1 {
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    text-align: center; /* Centrar texto */
+}
+
+/* Estilo para h2 */
+h2 {
+    color: #555;
+    font-size: 1.8em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center; /* Centrar texto */
+}
+
+/* Estilo para formularios */
+form {
+    background: #fff; /* Fondo blanco para formularios */
+    padding: 20px;
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    margin-bottom: 20px;
+    text-align: center; /* Centrar el contenido del formulario */
+}
+
+/* Estilo para etiquetas */
+label {
+    display: block; /* Cada etiqueta ocupa una línea completa */
+    margin-bottom: 5px; /* Espacio inferior */
+    font-weight: bold; /* Negrita */
+    text-align: left; /* Alinear etiquetas a la izquierda */
+}
+
+/* Estilo para inputs */
+input[type="text"],
+input[type="submit"] {
+    width: 80%; /* Ancho del input */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 15px; /* Espacio inferior */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para botones */
+button {
+    background: #c73232ff; /* Color de fondo del botón */
+    color: #fff; /* Color del texto */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cursor de mano al pasar */
+    transition: background 0.3s; /* Transición suave */
+}
+
+button:hover {
+    background: rgb(177, 18, 18); /* Color de fondo al pasar el ratón */
+}
+
+/* Estilo para enlaces */
+a {
+    color: #c73232ff; /* Color del enlace */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Permitir margen y padding */
+}
+
+a:hover {
+    background: rgb(177, 18, 18);
+    text-decoration: underline; /* Subrayar al pasar el ratón */
+}
+
+/* Estilo para listas */
+ul {
+    list-style-type: none; /* Sin viñetas */
+    padding: 0; /* Sin padding */
+}
+
+li {
+    background: #fff; /* Fondo blanco para cada elemento de la lista */
+    padding: 10px; /* Espaciado interno */
+    margin-bottom: 10px; /* Espacio inferior entre elementos */
+    border-radius: 5px; /* Bordes redondeados */
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para spans */
+span {
+    color: #333; /* Color del texto */
+    display: block; /* Ocupa una línea completa */
+    text-align: center; /* Centrar texto */
+}
+img {
+    max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
+    height: auto; /* Mantiene la relación de aspecto de la imagen */
+    max-height: 300px; /* Establece una altura máxima */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área sin distorsionar */
+}

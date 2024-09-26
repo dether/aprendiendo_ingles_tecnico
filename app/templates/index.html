@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clasificaciones de Palabras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Bienvenido a aprender Ingles Técnico</h1>
+    <form action="{{ url_for('profesor') }}">
+        <button type="submit">Agregar nueva palabra</button>
+    </form>
+
+    <h1>Clasificaciones de Palabras</h1>
+
+    <ul>
+        {% if tipos %}
+            {% for tipo in tipos %}
+                <li><a href="{{ url_for('listar_palabras', tipo=tipo['tipo_palabra']) }}">{{ tipo['tipo_palabra'] }}</a></li>
+            {% endfor %}
+        {% else %}
+            <li>No hay tipos de palabras disponibles.</li>
+        {% endif %}
+    </ul>
+</body>
+</html>
