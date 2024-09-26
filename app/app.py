@@ -12,10 +12,8 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configura una clave secreta para gestionar las sesiones
-app.secret_key = os.getenv('SECRET_KEY') 
 
 # Local
-PROFESOR_PASSWORD = os.getenv('PROFESOR_PASSWORD')
 HOST = os.getenv('HOST')
 USER = os.getenv('USER')
 PASSWORD = os.getenv('PASSWORD')
