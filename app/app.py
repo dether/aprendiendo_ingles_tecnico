@@ -1,3 +1,4 @@
+from aifc import Error
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
@@ -13,22 +14,34 @@ app = Flask(__name__)
 # Configura una clave secreta para gestionar las sesiones
 app.secret_key = os.getenv('SECRET_KEY') 
 
-# Obtener la contraseña desde el .env
+# Local
 PROFESOR_PASSWORD = os.getenv('PROFESOR_PASSWORD')
 HOST = os.getenv('HOST')
 USER = os.getenv('USER')
 PASSWORD = os.getenv('PASSWORD')
 DATABASE = os.getenv('DATABASE')
 
+# Deploy
+MYSQL_HOST = os.getenv('MYSQL_HOST')
+MYSQL_PORT = os.getenv('MYSQL_PORT')
+MYSQL_DATABASE = os.getenv('MYSQL_DATABASE')
+MYSQL_USER = os.getenv('MYSQL_USER')
+MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
 
 def get_db_connection():
-    conn = mysql.connector.connect(
-        host=HOST, 
-        user=USER,  
-        password=PASSWORD,  
-        database=DATABASE  
-    )
-    return conn
+    try:
+        connection = mysql.connector.connect(
+            host=os.getenv('MYSQL_HOST'),  
+            port=os.getenv('MYSQL_PORT'),  
+            user=os.getenv('MYSQL_USER'),
+            password=os.getenv('MYSQL_PASSWORD'),
+            database=os.getenv('MYSQL_DATABASE')
+        )
+        if connection.is_connected():
+            return connection
+    except Error as e:
+        print(f"Error al conectar a MySQL: {e}")
+        return None
 
 @app.route('/')
 def index():
