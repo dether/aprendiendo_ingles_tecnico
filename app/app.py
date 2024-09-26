@@ -15,13 +15,18 @@ app.secret_key = os.getenv('SECRET_KEY')
 
 # Obtener la contraseña desde el .env
 PROFESOR_PASSWORD = os.getenv('PROFESOR_PASSWORD')
+HOST = os.getenv('HOST')
+USER = os.getenv('USER')
+PASSWORD = os.getenv('PASSWORD')
+DATABASE = os.getenv('DATABASE')
+
 
 def get_db_connection():
     conn = mysql.connector.connect(
-        host='localhost',  # Cambia esto si es necesario
-        user='root',  # Cambia esto a tu usuario
-        password='9874123asd',  # Cambia esto a tu contraseña
-        database='ingles'  # Cambia esto a tu base de datos
+        host=HOST,  # Cambia esto si es necesario
+        user=USER,  # Cambia esto a tu usuario
+        password=PASSWORD,  # Cambia esto a tu contraseña
+        database=DATABASE  # Cambia esto a tu base de datos
     )
     return conn
 
