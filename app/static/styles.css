@@ -1,9 +1,8 @@
 /* Estilos generales */
 body {
     font-family: Arial, sans-serif;
-    line-height: 2.6;
-    background-color: white;
-    /* background-color: #ededabff;  */
+    line-height: 1.6; /* Cambié a 1.6 para una mejor legibilidad */
+    background-color: #ededabff;
     margin: 0;
     padding: 20px;
 }
@@ -33,12 +32,10 @@ h2 {
 
 /* Estilo para formularios */
 form {
-    background: #fff; /* Fondo blanco para formularios */
-    padding: 20px;
-    border-radius: 5px; /* Bordes redondeados */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    background: #ededabff; /* Fondo blanco para formularios */
+    padding: 2vh;
     margin-bottom: 20px;
-    text-align: center; /* Centrar el contenido del formulario */
+    text-align:center; /* Centrar el contenido del formulario */
 }
 
 /* Estilo para etiquetas */
@@ -49,20 +46,33 @@ label {
     text-align: left; /* Alinear etiquetas a la izquierda */
 }
 
-/* Estilo para inputs */
+/* Estilo para inputs de texto */
 input[type="text"],
-input[type="submit"] {
+input[type="search"],
+input[type="submit"],
+select,
+textarea {
     width: 80%; /* Ancho del input */
     padding: 10px; /* Espaciado interno */
     margin-bottom: 15px; /* Espacio inferior */
-    border: 1px solid #ccc; /* Borde gris claro */
+    border: 1px solid #c73232ff; /* Borde gris claro */
     border-radius: 5px; /* Bordes redondeados */
+    font-size: 1em; /* Tamaño de fuente */
+}
+
+/* Estilo para inputs de texto en focus */
+input[type="text"]:focus,
+input[type="search"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #c73232ff; /* Cambia el color del borde al enfocar */
+    outline: none; /* Quitar el contorno por defecto */
 }
 
 /* Estilo para botones */
 button {
     background: #c73232ff; /* Color de fondo del botón */
-    color: #fff; /* Color del texto */
+    color: #ededabff; /* Color del texto */
     padding: 10px 15px; /* Espaciado interno */
     border: none; /* Sin borde */
     border-radius: 5px; /* Bordes redondeados */
@@ -71,7 +81,7 @@ button {
 }
 
 button:hover {
-    background: rgb(177, 18, 18); /* Color de fondo al pasar el ratón */
+    background: #c73232ff; /* Color de fondo al pasar el ratón */
 }
 
 /* Estilo para enlaces */
@@ -82,7 +92,7 @@ a {
 }
 
 a:hover {
-    background: rgb(177, 18, 18);
+    background: #c73232ff;
     text-decoration: underline; /* Subrayar al pasar el ratón */
 }
 
@@ -93,11 +103,29 @@ ul {
 }
 
 li {
-    background: #fff; /* Fondo blanco para cada elemento de la lista */
+    background: #ededabff; /* Fondo blanco para cada elemento de la lista */
     padding: 10px; /* Espaciado interno */
     margin-bottom: 10px; /* Espacio inferior entre elementos */
     border-radius: 5px; /* Bordes redondeados */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+/* Estilo para tablas */
+table {
+    width: 100%; /* Ancho completo */
+    border-collapse: collapse; /* Quitar espacios entre celdas */
+}
+
+th, td {
+    padding: 12px; /* Espacio interno en celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+    border-bottom: 1px solid #ddd; /* Línea inferior */
+}
+
+th {
+    background-color: #c73232ff; /* Fondo para encabezados */
+    color: #333; /* Color del texto en encabezados */
+    font-weight: bold; /* Negrita en encabezados */
 }
 
 /* Estilo para spans */
@@ -106,9 +134,26 @@ span {
     display: block; /* Ocupa una línea completa */
     text-align: center; /* Centrar texto */
 }
+
+/* Estilo para imágenes */
 img {
     max-width: 100%; /* Asegura que la imagen no exceda el ancho del contenedor */
     height: auto; /* Mantiene la relación de aspecto de la imagen */
     max-height: 300px; /* Establece una altura máxima */
     object-fit: cover; /* Ajusta la imagen para cubrir el área sin distorsionar */
+}
+
+/* Estilo para el contenedor de mensajes */
+.message {
+    padding: 10px;
+    border: 1px solid #c73232ff; /* Borde azul */
+    background-color: #ededabff; /* Fondo gris claro */
+    margin-bottom: 20px; /* Espacio inferior */
+    border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para mensajes de error */
+.error {
+    color: #c73232ff; /* Color rojo para mensajes de error */
+    font-weight: bold; /* Negrita para resaltar */
 }
