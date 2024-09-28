@@ -2,7 +2,8 @@
 body {
     font-family: Arial, sans-serif;
     line-height: 2.6;
-    background-color: #ededabff; /* Color de fondo */
+    background-color: white;
+    /* background-color: #ededabff;  */
     margin: 0;
     padding: 20px;
 }

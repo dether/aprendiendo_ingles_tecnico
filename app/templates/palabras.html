@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Palabras</title>
+    
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    
+    <h1>Lista de Palabras</h1>    
+
+    <form method="GET" action="{{ url_for('mostrar_palabras') }}">
+        <label for="busqueda">Buscar palabra:</label>
+        <input type="text" name="busqueda" id="busqueda" value="{{ busqueda }}" placeholder="Escribe una palabra...">
+    
+        <label for="tipo_palabra">Filtrar por tipo de palabra:</label>
+        <select name="tipo_palabra" id="tipo_palabra" onchange="this.form.submit()">
+            <option value="">Todos</option>
+            <option value="sustantivos" {% if tipo_palabra == 'sustantivos' %}selected{% endif %}>Sustantivos</option>
+            <option value="verbos" {% if tipo_palabra == 'verbos' %}selected{% endif %}>Verbos</option>
+            <option value="adjetivos" {% if tipo_palabra == 'adjetivos' %}selected{% endif %}>Adjetivos</option>
+            <option value="adverbios" {% if tipo_palabra == 'adverbio' %}selected{% endif %}>Adverbios</option>
+            <option value="conectores" {% if tipo_palabra == 'conector' %}selected{% endif %}>Conectores</option>
+        </select>
+    
+        <label>Ordenar por:</label>
+        <select name="orden" onchange="this.form.submit()">
+            <option value="asc" {% if orden == 'asc' %}selected{% endif %}>Ascendente</option>
+            <option value="desc" {% if orden == 'desc' %}selected{% endif %}>Descendente</option>
+        </select>
+    
+        <button type="submit">Buscar</button> <!-- Añadir un botón para enviar el formulario -->
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Palabra</th>
+                <th>Primera Traducción</th>
+                <th>Tipo de Palabra</th>
+                <th>Imagen</th>
+                <th>Ver Más</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for palabra in palabras %}
+            <tr>
+                <td>{{ palabra.palabra }}</td>
+                <td>{{ palabra.primera_traduccion }}</td>
+                <td>{{ palabra.tipo_palabra }}</td>
+                <td>
+                    {% if palabra.imagen %}
+                    <img src="{{ palabra['imagen'] }}" alt="{{ palabra['palabra'] }}" style="max-width: 100px;">
+                    {% else %}
+                    Sin imagen
+                    {% endif %}
+                </td>
+                <td><a href="{{ url_for('detalles_palabra', palabra_id=palabra.id_palabra) }}">Ver más</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

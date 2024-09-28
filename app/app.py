@@ -1,8 +1,6 @@
-from aifc import Error
 import os
 from flask import Flask, render_template, request, redirect, url_for, session, flash
 import mysql.connector
-import json
 from dotenv import load_dotenv
 
 
@@ -10,8 +8,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-
-# Configura una clave secreta para gestionar las sesiones
 
 # Local
 HOST = os.getenv('HOST')
@@ -27,7 +23,6 @@ MYSQL_USER = os.getenv('MYSQL_USER')
 MYSQL_PASSWORD = os.getenv('MYSQL_PASSWORD')
 
 def get_db_connection():
-    try:
         connection = mysql.connector.connect(
             host=os.getenv('MYSQL_HOST'),  
             port=os.getenv('MYSQL_PORT'),  
@@ -37,9 +32,7 @@ def get_db_connection():
         )
         if connection.is_connected():
             return connection
-    except Error as e:
-        print(f"Error al conectar a MySQL: {e}")
-        return None
+
 
 @app.route('/')
 def index():
@@ -194,6 +187,59 @@ def editar_palabra(palabra_id):
     conn.close()
 
     return render_template('editar_palabra.html', palabra=palabra, traducciones=traducciones, oraciones=oraciones)
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+@app.route('/palabras', methods=['GET'])
+def mostrar_palabras():
+    # Establecer conexión con la base de datos
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    tipo_palabra = request.args.get('tipo_palabra', None)  # Obtener el filtro del tipo de palabra
+    orden = request.args.get('orden', 'asc')  # Obtener el orden (ascendente o descendente)
+    busqueda = request.args.get('busqueda', '')  # Obtener el término de búsqueda, por defecto es vacío
+
+    # Base de la consulta
+    consulta = """
+    SELECT p.id_palabra, p.palabra, p.tipo_palabra, p.imagen, 
+            (SELECT t.traduccion FROM traducciones t WHERE t.id_palabra = p.id_palabra LIMIT 1) AS primera_traduccion
+    FROM palabras p
+    """
+
+    # Si hay un filtro por tipo de palabra, agrega la condición a la consulta
+    condiciones = []
+    parametros = []
+
+    if tipo_palabra:
+        condiciones.append("p.tipo_palabra = %s")
+        parametros.append(tipo_palabra)
+
+    # Si hay un término de búsqueda, agrega la condición a la consulta
+    if busqueda:
+        condiciones.append("p.palabra LIKE %s")
+        parametros.append(f"%{busqueda}%")  # Busca cualquier palabra que contenga el término
+
+    # Agrega las condiciones a la consulta si existen
+    if condiciones:
+        consulta += " WHERE " + " AND ".join(condiciones)
+
+    consulta += " GROUP BY p.id_palabra "
+    consulta += " ORDER BY p.palabra " + ("ASC" if orden == 'asc' else "DESC")
+
+    # Ejecuta la consulta
+    cursor.execute(consulta, parametros)  # Pasa los parámetros de la consulta
+    palabras = cursor.fetchall()
+    
+    cursor.close()
+    conn.close()
+
+    # Renderizamos la plantilla y pasamos los resultados y los filtros seleccionados
+    return render_template('palabras.html', palabras=palabras, tipo_palabra=tipo_palabra, orden=orden, busqueda=busqueda)
+
+
+#!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
 
 #?????????????????????????????????????????????????????????????????????????????
